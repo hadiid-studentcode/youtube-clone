@@ -1,0 +1,20 @@
+.photo-card{
+    width: 35px;
+    
+}
+
+.title{
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #000;
+    display: inline-flex;
+    margin-left: 5px;
+}
+
+.title-subcriber{
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #000;
+    display: inline-flex;
+ 
+}
