@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    protected $person;
 
-    protected $person, $user;
+    protected $user;
 
-    public function __construct(Person $person, User $user){
+    public function __construct(Person $person, User $user)
+    {
         $this->person = $person;
         $this->user = $user;
     }
-    public function index(){
-        return view('pages.login',[
+
+    public function index()
+    {
+        return view('pages.login', [
             'title' => 'Login',
         ]);
     }
@@ -39,13 +43,15 @@ class UserController extends Controller
         return back();
     }
 
-    public function register(){
-        return view('pages.register',[
+    public function register()
+    {
+        return view('pages.register', [
             'title' => 'Register',
         ]);
     }
 
-    public function registerStore(Request $request){
+    public function registerStore(Request $request)
+    {
         try {
             $request->validate([
                 'fullname' => 'required',
@@ -54,18 +60,17 @@ class UserController extends Controller
                 'password' => 'required',
                 'alamat' => 'required',
                 'tanggalLahir' => 'required',
-                'jk'=>'required',
+                'jk' => 'required',
             ]);
 
             // save person
             $this->person->savePerson([
                 'fullname' => $request->fullname,
-                'tanggal_lahir'=> $request->tanggalLahir,
-                'jenis_kelamin'=> $request->jk,
-                'alamat'=> $request->alamat,
-                'foto'=> $request->foto,
+                'tanggal_lahir' => $request->tanggalLahir,
+                'jenis_kelamin' => $request->jk,
+                'alamat' => $request->alamat,
+                'foto' => $request->foto,
             ]);
-
 
             // get id person last
             $id_person = $this->person->getPersonLastId();
@@ -80,14 +85,13 @@ class UserController extends Controller
 
             return redirect('/login');
 
-
-
-
         } catch (\Throwable $th) {
             dd('error');
+
             return back()->with('error', 'Terjadi kesalahan');
         }
     }
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

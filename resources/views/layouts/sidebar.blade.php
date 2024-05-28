@@ -1,6 +1,6 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
      <!-- Brand Logo -->
-     <a href="index3.html" class="brand-link" style="background-color: black">
+     <a href="{{ url('/') }}" class="brand-link" style="background-color: black">
          <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
          <span class="brand-text font-weight-light font-weight-bold">Youtube</span>
      </a>

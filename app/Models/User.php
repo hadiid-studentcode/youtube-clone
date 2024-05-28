@@ -12,8 +12,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'users';
+
     protected $primaryKey = 'id';
-    
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'id_person'
+        'id_person',
     ];
 
     /**
@@ -50,7 +50,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function saveUser($data){
+    public function saveUser($data)
+    {
         return User::create($data);
     }
 }

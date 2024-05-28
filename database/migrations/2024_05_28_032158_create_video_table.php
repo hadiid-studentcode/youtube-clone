@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('url');
-            $table->string('thumbnail');
             $table->string('video');
+            $table->date('tanggal');
+            $table->integer('komentar')->nullable();
+            $table->integer('suka')->nullable();
+            $table->integer('tidak_suka')->nullable();
             $table->timestamps();
         });
     }

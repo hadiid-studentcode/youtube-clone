@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KontenController extends Controller
@@ -9,10 +11,20 @@ class KontenController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $video;
+
+    public function __construct(Video $video)
+    {
+        $this->video = $video;
+    }
+
     public function index()
     {
-        return view('pages.konten')
-        ->with('title','Konten');
+
+        return view('pages.konten', [
+            'title' => 'Konten',
+            'konten' => $this->video->getKonten(),
+        ]);
     }
 
     /**
@@ -28,7 +40,35 @@ class KontenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        try {
+            $request->validate([
+                'title' => 'required',
+                'description' => 'required',
+                'video' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            ]);
+
+            // simpan video ke database
+            $this->video->saveVideo([
+                'id_user' => auth()->user()->id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'url' => hash('crc32', $request->title.'-'.Carbon::now('Asia/Jakarta')->format('Y-m-d')),
+                'video' => $request->video->getClientOriginalName(),
+                'tanggal' => Carbon::now('Asia/Jakarta')->format('Y-m-d'),
+                'komentar' => 0,
+                'suka' => 0,
+                'tidak_suka' => 0,
+
+            ]);
+
+            // simpan video ke storage
+            $this->video->saveVideoToStorage($request->video, $request->video->getClientOriginalName());
+
+            return back()->with('success', 'Video uploaded successfully');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     /**
@@ -60,6 +100,13 @@ class KontenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $this->video->deleteVideo($id);
+
+            return back()->with('success', 'Video deleted successfully');
+
+        } catch (\Throwable $th) {
+            return back();
+        }
     }
 }

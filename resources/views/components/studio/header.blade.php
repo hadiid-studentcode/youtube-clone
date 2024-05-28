@@ -13,25 +13,27 @@
 
 
 
-
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown ">
-            <a class="btn btn-outline-light rounded-pill " data-toggle="dropdown" href="#">
-                <i class="far fa-bell"></i>
-                Buat
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right ">
-
-                <a href="{{ url('/studio') }}" class="dropdown-item" data-toggle="modal" data-target="#upload">
-                    Upload Video
+        @if ($title !== 'Studio')
+            <li class="nav-item dropdown ">
+                <a class="btn btn-outline-light rounded-pill " data-toggle="dropdown" href="#">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Buat
                 </a>
 
+                <div class="dropdown-menu dropdown-menu-right ">
+
+                    <a href="{{ url('/studio') }}" class="dropdown-item" data-toggle="modal" data-target="#upload">
+                        Upload Video
+                    </a>
 
 
-            </div>
 
-        </li>
+                </div>
+
+            </li>
+        @endif
+
+
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="dropdown" href="#">
 
@@ -62,7 +64,8 @@
 <div class="modal fade" id="upload" aria-modal="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content bg-dark">
-            <form>
+            <form action="{{ url('/konten') }} " method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-header">
                     <h4 class="modal-title">Upload video</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -73,27 +76,17 @@
 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul (Wajib Diisi)</label>
-                        <input type="text" class="form-control" id="judul" aria-describedby="judul" name="title" required>
+                        <input type="text" class="form-control" id="judul" aria-describedby="judul"
+                            name="title" required>
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <textarea class="form-control" name="description" id="" cols="10"></textarea>
                     </div>
 
-                   
+
+                  
                     <div class="form-group">
-                        <label for="exampleInputFile">Thumbnail</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="Thumbnail" name="thumbnail" required>
-                                <label class="custom-file-label" for="exampleInputFile"></label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
-                            </div>
-                        </div>
-                    </div>
-                       <div class="form-group">
                         <label for="video">Video</label>
                         <div class="input-group">
                             <div class="custom-file">
@@ -109,7 +102,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-light">Save changes</button>
+                    <button type="submit" class="btn btn-outline-light">Save changes</button>
                 </div>
             </form>
         </div>
@@ -117,5 +110,3 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
-

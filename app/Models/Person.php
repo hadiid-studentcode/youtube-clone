@@ -10,6 +10,7 @@ class Person extends Model
     use HasFactory;
 
     protected $table = 'person';
+
     protected $primaryKey = 'id';
 
     protected $fillable = [
@@ -20,12 +21,13 @@ class Person extends Model
         'foto',
     ];
 
-    public function savePerson($data){
+    public function savePerson($data)
+    {
         return Person::create($data);
     }
+
     public function getPersonLastId()
     {
         return Person::latest('id')->value('id');
     }
-    
 }
