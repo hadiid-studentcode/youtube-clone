@@ -73,11 +73,11 @@
 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul (Wajib Diisi)</label>
-                        <input type="text" class="form-control" id="judul" aria-describedby="judul" required>
+                        <input type="text" class="form-control" id="judul" aria-describedby="judul" name="title" required>
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" name="" id="" cols="10"></textarea>
+                        <textarea class="form-control" name="description" id="" cols="10"></textarea>
                     </div>
 
                    

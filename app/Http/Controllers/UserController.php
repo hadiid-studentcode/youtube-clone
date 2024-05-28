@@ -74,7 +74,7 @@ class UserController extends Controller
             $this->user->saveUser([
                 'username' => $request->username,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => bcrypt($request->password),
                 'id_person' => $id_person,
             ]);
 

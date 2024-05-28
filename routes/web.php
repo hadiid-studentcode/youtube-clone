@@ -12,7 +12,7 @@ Route::get('/', function () {
         'title' => env('APP_NAME'),
         'isLogin' => $isLogin
     ]);
-});
+})->name('login');
 
 
 Route::middleware(['guest'])->group(function () {

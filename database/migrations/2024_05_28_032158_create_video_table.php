@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('url');
             $table->string('thumbnail');
+            $table->string('video');
             $table->timestamps();
         });
     }
