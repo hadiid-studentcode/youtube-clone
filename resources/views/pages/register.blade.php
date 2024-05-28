@@ -47,34 +47,35 @@
                             Halaman Register</h1>
                     </div>
                     <div class="col">
-                        <form class="row g-3">
+                        <form action="{{ url('/register') }}" method="POST" class="row g-3">
+                            @csrf
                             <div class="col-md-6">
                                 <label for="fullname" class="form-label">FullName</label>
-                                <input type="text" class="form-control" id="fullname" name="fullname">
+                                <input type="text" class="form-control" id="fullname" name="fullname" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="col-12">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username">
+                                <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                             <div class="col-12">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password">
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat">
+                                <input type="text" class="form-control" id="alamat" name="alamat" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="tanggalLahir" class="form-label">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir">
+                                <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="jk" class="form-label">Jenis Kelamin</label>
-                                <select id="jk" name="jk" class="form-select">
+                                <select id="jk" name="jk" class="form-select" required>
                                     <option selected>Pilih...</option>
                                     <option value="laki-laki">Laki-laki</option>
                                     <option value="perempuan">Perempuan</option>
@@ -87,7 +88,7 @@
                             </div>
                           
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                <button type="submit" class="btn btn-primary">Register</button>
                             </div>
                         </form>
 
