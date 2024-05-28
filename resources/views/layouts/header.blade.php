@@ -33,56 +33,64 @@
         </li>
 
 
+        @if ($isLogin == false)
+            <li class="nav-item">
+                <a class="btn btn-outline-light" href="{{ url('/login') }}" role="button">
 
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown ">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
+                    Sign In
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
+            </li>
+        @else
+            <li class="nav-item dropdown ">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">15</span>
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">15 Notifications</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 4 new messages
+                        <span class="float-right text-muted text-sm">3 mins</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 8 friend requests
+                        <span class="float-right text-muted text-sm">12 hours</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-file mr-2"></i> 3 new reports
+                        <span class="float-right text-muted text-sm">2 days</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="dropdown" href="#">
 
 
-                <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
-                    class="img-circle elevation-1" alt="User Image" width="25">
-
-
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
-                <span class="dropdown-item dropdown-header">How to Basic</span>
-                <div class="dropdown-divider"></div>
-
-                <a href="{{ url('/studio') }}" class="dropdown-item">
                     <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
-                        class="img-circle elevation-1 mr-2" alt="User Image" width="25"> Lihat Channel Anda
+                        class="img-circle elevation-1" alt="User Image" width="25">
+
+
                 </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
+                    <span class="dropdown-item dropdown-header">How to Basic</span>
+                    <div class="dropdown-divider"></div>
+
+                    <a href="{{ url('/studio') }}" class="dropdown-item">
+                        <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
+                            class="img-circle elevation-1 mr-2" alt="User Image" width="25"> Lihat Channel Anda
+                    </a>
 
 
-                <a href="{{ url('/logout') }}" class="dropdown-item dropdown-footer">Logout</a>
-            </div>
-        </li>
+                    <a href="{{ url('/logout') }}" class="dropdown-item dropdown-footer">Logout</a>
+                </div>
+            </li>
+        @endif
 
     </ul>
 </nav>
