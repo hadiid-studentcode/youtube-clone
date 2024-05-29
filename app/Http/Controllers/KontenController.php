@@ -21,11 +21,15 @@ class KontenController extends Controller
 
     public function index(Person $person)
     {
+        
+        
         $person = $person->getPersonFirst(auth()->user()->id_person);
+
+        $konten = $this->video->getKonten(auth()->user()->id);
 
         return view('pages.konten', [
             'title' => 'Konten',
-            'konten' => $this->video->getKonten(),
+            'konten' =>$konten,
             'person' => $person,
         ]);
     }

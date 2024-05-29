@@ -29,6 +29,8 @@ Route::get('/', function (Person $person) {
 Route::get('/watch/{url}', [WatchController::class, 'Watch'])->name('watch.show');
 Route::get('/watch/like/{url}', [WatchController::class, 'like'])->name('watch.like');
 Route::get('/watch/dislike/{url}', [WatchController::class, 'dislike'])->name('watch.dislike');
+Route::post('/watch/komentar/{url}', [WatchController::class, 'komentar'])->name('watch.komentar');
+
 
 Route::middleware(['guest'])->group(function () {
 

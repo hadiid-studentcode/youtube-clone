@@ -37,9 +37,9 @@ class Video extends Model
         return $data->storeAs('public/video', $name);
     }
 
-    public function getKonten()
+    public function getKonten($id_user)
     {
-        return Video::all();
+        return Video::where('id_user', $id_user)->get();
     }
 
     public function deleteVideo($id)
@@ -84,5 +84,10 @@ class Video extends Model
 
         return Video::where('url', $url)
             ->update(['tidak_suka' => $dislike]);
+    }
+
+    public function tambahKomentar($id_video,$jumlahKomentar){
+        return Video::where('id', $id_video)
+            ->update(['komentar' => $jumlahKomentar]);
     }
 }

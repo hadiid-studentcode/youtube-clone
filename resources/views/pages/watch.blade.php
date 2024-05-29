@@ -20,7 +20,7 @@
                     <nav class="navbar bg-body-tertiary">
                         <div class="container-fluid">
                             <a class="navbar-brand text-white" href="#">
-                                <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
+                                <img src="{{ asset('storage/person/' . $video->foto) }}"
                                     alt="Logo" width="35"
                                     class="d-inline-block align-text-top img-circle elevation-1">
                                 {{ $video->fullName }}
@@ -86,7 +86,7 @@
                         <div class="row g-0">
                             <div class="col-md-1">
                                 @if ($isLogin == true)
-                                    <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
+                                    <img src="{{ asset('storage/person/' . $person->foto) }}"
                                         class="img-fluid rounded-start img-circle elevation-1" alt="...">
                                 @elseif($isLogin == false)
                                     <svg class="img-fluid rounded-start img-circle elevation-1"
@@ -100,9 +100,10 @@
                                 <div class="card-body">
 
                                     @if ($isLogin == true)
-                                        <form action="{{ url('/komentar/' . $video->url) }}" method="POST">
+                                        <form action="{{ url('/watch/komentar/' . $video->id) }}" method="POST">
+                                            @csrf
                                             <input class="form-control bg-dark" type="text"
-                                                placeholder="Tambahkan Komentar" aria-label="default input example">
+                                                placeholder="Tambahkan Komentar" aria-label="default input example" name="komentar">
                                             <button type="submit"
                                                 class="btn btn-primary rounded-pill mt-2">Komentar</button>
                                         </form>
@@ -126,26 +127,27 @@
                         </div>
                     </div>
 
+                    @foreach($komentar as $k)
                     <div class="mb-3 mt-4 ">
                         <div class="row g-0">
                             <div class="col-md-1">
-                                <img src="https://yt3.ggpht.com/2nXtMgikaLSUsjosxLjLuEUDYdVaatW9sT4XcVt43kyFv06SPEbrQ_eUtMNXddgUQdG-qNMj=s88-c-k-c0x00ffffff-no-rj"
+                                <img src="{{ asset('storage/person/' . $k->foto) }}"
                                     class="img-fluid rounded-start img-circle elevation-1" alt="...">
                             </div>
                             <div class="col-md-11">
                                 <div class="card-body">
                                     <h5 class="card-title text-white">
-                                        <a class="text-white" href="@MusicDecomposer">@MusicDecomposer</a> <small
-                                            class="text-body-secondary"> 3 tahun yang lalu</small>
+                                        <a class="text-white" href="#">{{ $k->fullName }}</a> <small
+                                            class="text-body-secondary"> {{ $k->created_at }}</small>
                                     </h5>
-                                    <p class="card-text text-white">Please make another tutorial for how to set ice on
-                                        fire.
+                                    <p class="card-text text-white">{{ $k->komentar }}
                                     </p>
 
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
 
                 </div>

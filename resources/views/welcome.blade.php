@@ -55,7 +55,7 @@
 
                         <div class="card-body">
                             <h5 class="card-title d-flex" style="color: white">
-                                <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
+                                <img src="{{ asset('storage/person/' . $v->foto) }}"
                                     class="img-circle elevation-2 mr-2" alt="User Image" width="30" height="30">
 
                                 <a class="text-decoration-none text-white" href="{{ url('/watch/' . $v->url) }}">

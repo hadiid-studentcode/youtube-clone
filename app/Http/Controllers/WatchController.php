@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Komentar;
 use App\Models\Person;
 use App\Models\Video;
+use Illuminate\Http\Request;
+
 
 class WatchController extends Controller
 {
     protected $video;
 
     protected $person;
+    protected $komentar;
 
-    public function __construct(Video $video, Person $person)
+    public function __construct(Video $video, Person $person,Komentar $komentar)
     {
         $this->video = $video;
         $this->person = $person;
+        $this->komentar= $komentar;
     }
 
     public function Watch($url)
@@ -28,7 +33,11 @@ class WatchController extends Controller
         }
 
         $videos = $this->video->findVideoWhereUrl($url);
+
+
         $videoMore = $this->video->findVideoMore($url);
+        $komentar = $this->komentar->getKomentar($videos->id);
+
 
         return view('pages.watch', [
             'isLogin' => $isLogin,
@@ -36,6 +45,7 @@ class WatchController extends Controller
             'video' => $videos,
             'videoMore' => $videoMore,
             'person' => $person,
+            'komentar'=>$komentar
         ]);
     }
 
@@ -68,6 +78,32 @@ class WatchController extends Controller
             return back();
         } catch (\Throwable $th) {
             return back();
+        }
+    }
+    public function komentar(Request $request,$id_video){
+
+        try {
+            $request->validate([
+                'komentar' => 'required',
+            ]);
+
+
+            $this->komentar->saveKomentar([
+                'id_person' => auth()->user()->id_person,
+                'id_video' => $id_video,
+                'komentar' => $request->komentar,
+            ]);
+
+            // tambah komentar yang di video
+
+            $jumlahKomentar = $this->komentar->jumlahKomentarBerdasarkanIDvideo($id_video);
+
+            $this->video->tambahKomentar($id_video,$jumlahKomentar);
+
+            return back();
+
+        } catch (\Throwable $th) {
+           return back();
         }
     }
 }
