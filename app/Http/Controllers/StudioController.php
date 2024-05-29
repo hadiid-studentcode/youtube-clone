@@ -14,10 +14,9 @@ class StudioController extends Controller
     {
         $person = $person->getPersonFirst(auth()->user()->id_person);
 
-
-        return view('pages.studio',[
+        return view('pages.studio', [
             'person' => $person,
-            'title' =>'Studio',
+            'title' => 'Studio',
         ]);
 
     }

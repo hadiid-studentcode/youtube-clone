@@ -53,7 +53,6 @@ class UserController extends Controller
     public function registerStore(Request $request)
     {
 
-
         try {
             $request->validate([
                 'fullname' => 'required',
@@ -87,8 +86,8 @@ class UserController extends Controller
 
             // simpan foto
             if ($request->foto !== null) {
-              $this->user->savePhotoToStorage($request->foto, $request->foto->getClientOriginalName());
-            } 
+                $this->user->savePhotoToStorage($request->foto, $request->foto->getClientOriginalName());
+            }
 
             return redirect('/login');
 

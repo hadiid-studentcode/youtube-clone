@@ -13,10 +13,8 @@ Route::get('/', function (Person $person) {
 
     if ($isLogin) {
         $person = $person->getPersonFirst(auth()->user()->id_person);
-      
+
     }
-
-
 
     $resultVideos = new Video();
     $videos = $resultVideos->getVideos();
@@ -25,14 +23,12 @@ Route::get('/', function (Person $person) {
         'title' => env('APP_NAME'),
         'isLogin' => $isLogin,
         'videos' => $videos,
-        'person' => $person
+        'person' => $person,
     ]);
 })->name('login');
 Route::get('/watch/{url}', [WatchController::class, 'Watch'])->name('watch.show');
 Route::get('/watch/like/{url}', [WatchController::class, 'like'])->name('watch.like');
 Route::get('/watch/dislike/{url}', [WatchController::class, 'dislike'])->name('watch.dislike');
-
-
 
 Route::middleware(['guest'])->group(function () {
 

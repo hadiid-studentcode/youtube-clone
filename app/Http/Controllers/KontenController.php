@@ -23,11 +23,10 @@ class KontenController extends Controller
     {
         $person = $person->getPersonFirst(auth()->user()->id_person);
 
-
         return view('pages.konten', [
             'title' => 'Konten',
             'konten' => $this->video->getKonten(),
-            'person' => $person
+            'person' => $person,
         ]);
     }
 

@@ -54,7 +54,9 @@ class User extends Authenticatable
     {
         return User::create($data);
     }
-    public function savePhotoToStorage($data,$name){
+
+    public function savePhotoToStorage($data, $name)
+    {
         return $data->storeAs('public/person', $name);
     }
 }

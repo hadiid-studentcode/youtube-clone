@@ -7,7 +7,9 @@ use App\Models\Video;
 
 class WatchController extends Controller
 {
-    protected $video, $person;
+    protected $video;
+
+    protected $person;
 
     public function __construct(Video $video, Person $person)
     {
@@ -25,20 +27,18 @@ class WatchController extends Controller
             $person = null;
         }
 
-
-
         $videos = $this->video->findVideoWhereUrl($url);
         $videoMore = $this->video->findVideoMore($url);
-
 
         return view('pages.watch', [
             'isLogin' => $isLogin,
             'title' => $videos->title,
             'video' => $videos,
             'videoMore' => $videoMore,
-            'person' => $person
+            'person' => $person,
         ]);
     }
+
     public function like($url)
     {
 
@@ -47,16 +47,15 @@ class WatchController extends Controller
             $returnVideo = $this->video->jumlahLike($url);
             $like = intval($returnVideo->suka + 1);
 
-
-
-
             $this->video->likeVideo($url, $like);
+
             return back();
         } catch (\Throwable $th) {
             return back();
         }
 
     }
+
     public function dislike($url)
     {
         try {
@@ -64,10 +63,8 @@ class WatchController extends Controller
             $returnVideo = $this->video->jumlahDislike($url);
             $dislike = intval($returnVideo->tidak_suka + 1);
 
-
-
-
             $this->video->dislikeVideo($url, $dislike);
+
             return back();
         } catch (\Throwable $th) {
             return back();
