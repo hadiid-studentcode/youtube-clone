@@ -33,6 +33,7 @@ class Video extends Model
 
     public function saveVideoToStorage($data, $name)
     {
+
         return $data->storeAs('public/video', $name);
     }
 
@@ -59,5 +60,27 @@ class Video extends Model
     public function getVideos()
     {
         return Video::join('users', 'users.id', '=', 'video.id_user')->join('person', 'person.id', '=', 'users.id_person')->get();
+    }
+    public function likeVideo($url, $like)
+    {
+
+
+        return Video::where('url', $url)
+            ->update(['suka' => $like]);
+    }
+    public function jumlahLike($url)
+    {
+        return Video::select('suka')->where('url', $url)->first();
+    }
+    public function jumlahDislike($url)
+    {
+        return Video::select('tidak_suka')->where('url', $url)->first();
+    }
+    public function dislikeVideo($url, $dislike)
+    {
+
+
+        return Video::where('url', $url)
+            ->update(['tidak_suka' => $dislike]);
     }
 }

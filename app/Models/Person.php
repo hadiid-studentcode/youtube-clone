@@ -30,4 +30,8 @@ class Person extends Model
     {
         return Person::latest('id')->value('id');
     }
+
+    public function getPersonFirst($id_person){
+        return Person::where('id', $id_person)->first();
+    }
 }

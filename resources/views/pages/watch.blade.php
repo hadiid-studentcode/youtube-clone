@@ -6,7 +6,7 @@
 
                 <div class="embed-responsive embed-responsive-16by9">
 
-                    <video width="820" height="660" controls>
+                    <video id="myVideo" width="820" height="660" controls>
                         <source src="{{ asset('storage/video/' . $video->video . '') }}" type="video/mp4">
                         <source src="movie.ogg" type="video/ogg">
                         Your browser does not support the video tag.
@@ -26,9 +26,39 @@
                                 {{ $video->fullName }}
                             </a>
                             <div class="d-grid gap-2 d-md-block">
-                                <button class="btn btn-primary" type="button">Like</button>
-                                <button class="btn btn-primary" type="button">Bagikan</button>
-                                <button class="btn btn-primary" type="button">Download</button>
+                                @if ($isLogin == true)
+                                    <a href="{{ '/watch/like/' . $video->url }}" class="btn btn-primary" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                            width="24px" fill="#e8eaed">
+                                            <path
+                                                d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z" />
+                                        </svg>
+                                        {{ $video->suka }}</a>
+
+                                    <a href="{{ '/watch/dislike/' . $video->url }}" class="btn btn-primary" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                            width="24px" fill="#e8eaed">
+                                            <path
+                                                d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z" />
+                                        </svg> {{ $video->tidak_suka }}</a>
+                                @elseif($isLogin == false)
+                                    <a href="{{ '/login' }}" class="btn btn-primary" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                            width="24px" fill="#e8eaed">
+                                            <path
+                                                d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ '/login' }}" class="btn btn-primary" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                            width="24px" fill="#e8eaed">
+                                            <path
+                                                d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z" />
+                                        </svg>
+                                    </a>
+                                @endif
+                                <button class="btn btn-primary" type="button" onclick="bagikan()">Bagikan</button>
+                                <button class="btn btn-primary" type="button" onclick="download()">Download</button>
 
                             </div>
                         </div>
@@ -69,26 +99,22 @@
                             <div class="col-md-11">
                                 <div class="card-body">
 
-                                    @if($isLogin == true)
-
-                                    <form action="{{ url('/komentar/' . $video->url) }}" method="POST">
+                                    @if ($isLogin == true)
+                                        <form action="{{ url('/komentar/' . $video->url) }}" method="POST">
                                             <input class="form-control bg-dark" type="text"
                                                 placeholder="Tambahkan Komentar" aria-label="default input example">
                                             <button type="submit"
                                                 class="btn btn-primary rounded-pill mt-2">Komentar</button>
                                         </form>
-
-                                   
                                     @elseif($isLogin == false)
-                                     <a href="{{ url('/login') }}">
-                                        <form>
-                                            <input class="form-control bg-dark" type="text"
-                                                placeholder="Tambahkan Komentar" aria-label="default input example">
-                                            <button type="button"
-                                                class="btn btn-primary rounded-pill mt-2">Komentar</button>
-                                        </form>
-                                    </a>
-
+                                        <a href="{{ url('/login') }}">
+                                            <form>
+                                                <input class="form-control bg-dark" type="text"
+                                                    placeholder="Tambahkan Komentar" aria-label="default input example">
+                                                <button type="button"
+                                                    class="btn btn-primary rounded-pill mt-2">Komentar</button>
+                                            </form>
+                                        </a>
                                     @endif
 
 
@@ -112,7 +138,8 @@
                                         <a class="text-white" href="@MusicDecomposer">@MusicDecomposer</a> <small
                                             class="text-body-secondary"> 3 tahun yang lalu</small>
                                     </h5>
-                                    <p class="card-text text-white">Please make another tutorial for how to set ice on fire.
+                                    <p class="card-text text-white">Please make another tutorial for how to set ice on
+                                        fire.
                                     </p>
 
                                 </div>
@@ -134,8 +161,8 @@
                             <div class="col">
                                 <a href="{{ url('/watch/' . $vm->url . '') }}">
 
-                                    <video src="{{ asset('storage/video/' . $vm->video . '') }}" alt="{{ $vm->title }}"
-                                        width="250px"></video>
+                                    <video src="{{ asset('storage/video/' . $vm->video . '') }}"
+                                        alt="{{ $vm->title }}" width="250px"></video>
                                 </a>
 
                             </div>
@@ -171,4 +198,26 @@
 
         </div>
     </div>
+
+    <script>
+        function bagikan() {
+            navigator.clipboard.writeText('{{ url('/watch/' . $video->url . '') }}')
+                .then(() => {
+                    alert('URL Berhasil Disalin');
+                })
+                .catch(err => {
+                    console.error('Tidak dapat menyalin URL:', err);
+                });
+
+        }
+
+        function download() {
+            const video = document.getElementById('myVideo');
+            const downloadUrl = video.src;
+            const link = document.createElement('a');
+            link.href = '{{ asset('storage/video/' . $video->video . '') }}';
+            link.download = '{{ $video->title }}.mp4';
+            link.click();
+        }
+    </script>
 @endsection

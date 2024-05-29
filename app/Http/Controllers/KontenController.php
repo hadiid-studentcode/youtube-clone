@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,12 +19,15 @@ class KontenController extends Controller
         $this->video = $video;
     }
 
-    public function index()
+    public function index(Person $person)
     {
+        $person = $person->getPersonFirst(auth()->user()->id_person);
+
 
         return view('pages.konten', [
             'title' => 'Konten',
             'konten' => $this->video->getKonten(),
+            'person' => $person
         ]);
     }
 
@@ -44,7 +48,6 @@ class KontenController extends Controller
         try {
             $request->validate([
                 'title' => 'required',
-                'description' => 'required',
                 'video' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
             ]);
 

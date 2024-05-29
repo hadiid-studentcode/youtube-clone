@@ -47,7 +47,7 @@
                             Halaman Register</h1>
                     </div>
                     <div class="col">
-                        <form action="{{ url('/register') }}" method="POST" class="row g-3">
+                        <form action="{{ url('/register') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                             @csrf
                             <div class="col-md-6">
                                 <label for="fullname" class="form-label">FullName</label>

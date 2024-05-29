@@ -72,17 +72,17 @@
                 <a class="nav-link" data-toggle="dropdown" href="#">
 
 
-                    <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
+                    <img src="{{ asset('storage/person/'.$person->foto) }}"
                         class="img-circle elevation-1" alt="User Image" width="25">
 
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
-                    <span class="dropdown-item dropdown-header">How to Basic</span>
+                    <span class="dropdown-item dropdown-header">{{ $person->fullName }}</span>
                     <div class="dropdown-divider"></div>
 
                     <a href="{{ url('/studio') }}" class="dropdown-item">
-                        <img src="https://yt3.ggpht.com/5nhjkTZFabmAX5cwoWn3npQ7zO5HYmT0WufN7D0ndtcyDDqT9pWBBEW2n1JdfAUmqIymATNe=s68-c-k-c0x00ffffff-no-rj"
+                        <img src="{{ asset('storage/person/'.$person->foto) }}"
                             class="img-circle elevation-1 mr-2" alt="User Image" width="25"> Lihat Channel Anda
                     </a>
 

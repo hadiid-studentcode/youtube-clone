@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use Illuminate\Http\Request;
 
 class StudioController extends Controller
@@ -9,10 +10,15 @@ class StudioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Person $person)
     {
-        return view('pages.studio')
-            ->with('title', 'Studio');
+        $person = $person->getPersonFirst(auth()->user()->id_person);
+
+
+        return view('pages.studio',[
+            'person' => $person,
+            'title' =>'Studio',
+        ]);
 
     }
 

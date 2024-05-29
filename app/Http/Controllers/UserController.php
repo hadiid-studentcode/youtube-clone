@@ -52,6 +52,8 @@ class UserController extends Controller
 
     public function registerStore(Request $request)
     {
+
+
         try {
             $request->validate([
                 'fullname' => 'required',
@@ -69,7 +71,7 @@ class UserController extends Controller
                 'tanggal_lahir' => $request->tanggalLahir,
                 'jenis_kelamin' => $request->jk,
                 'alamat' => $request->alamat,
-                'foto' => $request->foto,
+                'foto' => $request->foto->getClientOriginalName(),
             ]);
 
             // get id person last
@@ -82,6 +84,11 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
                 'id_person' => $id_person,
             ]);
+
+            // simpan foto
+            if ($request->foto !== null) {
+              $this->user->savePhotoToStorage($request->foto, $request->foto->getClientOriginalName());
+            } 
 
             return redirect('/login');
 

@@ -35,8 +35,10 @@
 
                                              </a>
                                                 <p class="card-text">
+                                                    @if(isset($k->description))
                                                     <?php $parts = str_split($k->description, 30); ?>
                                                     {{ $parts[0] }}....
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>

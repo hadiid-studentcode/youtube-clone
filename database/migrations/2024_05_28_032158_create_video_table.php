@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('url');
             $table->string('video');
             $table->date('tanggal');
