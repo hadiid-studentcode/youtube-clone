@@ -6,11 +6,16 @@
 
                 <div class="embed-responsive embed-responsive-16by9">
 
-                    <video id="myVideo" width="820" height="660" controls>
+                    <video id="myVideo" width="3840" height="1080" controls autoplay>
                         <source src="{{ asset('storage/video/' . $video->video . '') }}" type="video/mp4">
                         <source src="movie.ogg" type="video/ogg">
+
                         Your browser does not support the video tag.
                     </video>
+
+                    
+
+
 
                 </div>
 
@@ -20,14 +25,14 @@
                     <nav class="navbar bg-body-tertiary">
                         <div class="container-fluid">
                             <a class="navbar-brand text-white" href="#">
-                                <img src="{{ asset('storage/person/' . $video->foto) }}"
-                                    alt="Logo" width="35"
+                                <img src="{{ asset('storage/person/' . $video->foto) }}" alt="Logo" width="35"
                                     class="d-inline-block align-text-top img-circle elevation-1">
                                 {{ $video->fullName }}
                             </a>
                             <div class="d-grid gap-2 d-md-block">
                                 @if ($isLogin == true)
-                                    <a href="{{ '/watch/like/' . $video->url }}" class="btn btn-primary" type="button">
+                                    <a href="  {{ url('/watch/like/' . $video->url . '') }}" class="btn btn-primary"
+                                        type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                             width="24px" fill="#e8eaed">
                                             <path
@@ -35,21 +40,23 @@
                                         </svg>
                                         {{ $video->suka }}</a>
 
-                                    <a href="{{ '/watch/dislike/' . $video->url }}" class="btn btn-primary" type="button">
+
+                                    <a href=" {{ url('/watch/dislike/' . $video->url . '') }}" class="btn btn-primary"
+                                        type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                             width="24px" fill="#e8eaed">
                                             <path
                                                 d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z" />
                                         </svg> {{ $video->tidak_suka }}</a>
                                 @elseif($isLogin == false)
-                                    <a href="{{ '/login' }}" class="btn btn-primary" type="button">
+                                    <a href="{{ url('/login') }}" class="btn btn-primary" type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                             width="24px" fill="#e8eaed">
                                             <path
                                                 d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z" />
                                         </svg>
                                     </a>
-                                    <a href="{{ '/login' }}" class="btn btn-primary" type="button">
+                                    <a href="{{ url('/login') }}" class="btn btn-primary" type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                             width="24px" fill="#e8eaed">
                                             <path
@@ -103,7 +110,8 @@
                                         <form action="{{ url('/watch/komentar/' . $video->id) }}" method="POST">
                                             @csrf
                                             <input class="form-control bg-dark" type="text"
-                                                placeholder="Tambahkan Komentar" aria-label="default input example" name="komentar">
+                                                placeholder="Tambahkan Komentar" aria-label="default input example"
+                                                name="komentar">
                                             <button type="submit"
                                                 class="btn btn-primary rounded-pill mt-2">Komentar</button>
                                         </form>
@@ -127,26 +135,26 @@
                         </div>
                     </div>
 
-                    @foreach($komentar as $k)
-                    <div class="mb-3 mt-4 ">
-                        <div class="row g-0">
-                            <div class="col-md-1">
-                                <img src="{{ asset('storage/person/' . $k->foto) }}"
-                                    class="img-fluid rounded-start img-circle elevation-1" alt="...">
-                            </div>
-                            <div class="col-md-11">
-                                <div class="card-body">
-                                    <h5 class="card-title text-white">
-                                        <a class="text-white" href="#">{{ $k->fullName }}</a> <small
-                                            class="text-body-secondary"> {{ $k->created_at }}</small>
-                                    </h5>
-                                    <p class="card-text text-white">{{ $k->komentar }}
-                                    </p>
+                    @foreach ($komentar as $k)
+                        <div class="mb-3 mt-4 ">
+                            <div class="row g-0">
+                                <div class="col-md-1">
+                                    <img src="{{ asset('storage/person/' . $k->foto) }}"
+                                        class="img-fluid rounded-start img-circle elevation-1" alt="...">
+                                </div>
+                                <div class="col-md-11">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-white">
+                                            <a class="text-white" href="#">{{ $k->fullName }}</a> <small
+                                                class="text-body-secondary"> {{ $k->created_at }}</small>
+                                        </h5>
+                                        <p class="card-text text-white">{{ $k->komentar }}
+                                        </p>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
 
 
@@ -222,4 +230,6 @@
             link.click();
         }
     </script>
+
+
 @endsection

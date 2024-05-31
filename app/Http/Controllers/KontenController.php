@@ -6,6 +6,8 @@ use App\Models\Person;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class KontenController extends Controller
 {
@@ -51,7 +53,7 @@ class KontenController extends Controller
         try {
             $request->validate([
                 'title' => 'required',
-                'video' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+                'video' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm,mkv',
             ]);
 
             // simpan video ke database
@@ -71,12 +73,16 @@ class KontenController extends Controller
             // simpan video ke storage
             $this->video->saveVideoToStorage($request->video, $request->video->getClientOriginalName());
 
+            // $this->video->uploadChunk($request->video, $request->video->getClientOriginalName());
+
             return back()->with('success', 'Video uploaded successfully');
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
     }
 
+
+    
     /**
      * Display the specified resource.
      */

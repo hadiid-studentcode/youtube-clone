@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Video extends Model
 {
@@ -86,8 +88,45 @@ class Video extends Model
             ->update(['tidak_suka' => $dislike]);
     }
 
-    public function tambahKomentar($id_video,$jumlahKomentar){
+    public function tambahKomentar($id_video, $jumlahKomentar)
+    {
         return Video::where('id', $id_video)
             ->update(['komentar' => $jumlahKomentar]);
     }
+
+    // public function uploadChunk($video,$name)
+    // {
+    //     $file = $video;
+    //     $chunkIndex = 'chunk';
+    //     $totalChunks ='total';
+    //     $filename = $name;
+
+    //     $filePath = 'uploads/' . $filename;
+    //     $chunkPath = $filePath . '/' . $chunkIndex;
+
+    //     Storage::put($chunkPath, file_get_contents($file->getRealPath()));
+
+    //     if ($chunkIndex + 1 == $totalChunks) {
+    //         $this->mergeChunks($filePath, $filename);
+    //     }
+
+    //     return response()->json(['status' => 'success']);
+    // }
+
+    // public function mergeChunks($filePath, $filename)
+    // {
+    //     $storagePath = storage_path('app/public/video/' . $filePath);
+    //     $finalPath = storage_path('app/public/video/' . $filename);
+
+    //     $file = fopen($finalPath, 'a');
+
+    //     for ($i = 0; $i < count(scandir($storagePath)) - 2; $i++) {
+    //         $chunk = file_get_contents($storagePath . '/' . $i);
+    //         fwrite($file, $chunk);
+    //         unlink($storagePath . '/' . $i);
+    //     }
+
+    //     fclose($file);
+    //     rmdir($storagePath);
+    // }
 }
